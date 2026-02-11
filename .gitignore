@@ -1,0 +1,98 @@
+﻿# SOLICITUD A COPILOT PARA QUE AGREGUE .GITIGNOREs PARA PROYECTOS .NET 10
+# Visual Studio / IDE
+.vs/
+.vscode/
+.idea/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Build outputs
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Bb]uild/
+[Bb]uild[Ll]og.*
+*.log
+*.tlog
+*.vspscc
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlh
+*.tli
+*.tmp
+*.tmp_proj
+*.lastcodeanalysissucceeded
+*.cachefile
+*.dbmdl
+*.jfm
+
+# .NET generated files
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.nuget.props
+*.nuget.targets
+**/Properties/PublishProfiles/
+**/wwwroot/
+Generated\ Files/
+
+# Packages
+/packages/
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+
+# Testing
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.coverage
+*.coveragexml
+*_i.cov
+*.opencover.xml
+*.trx
+*.vsp
+*.vspx
+
+# Publish outputs
+**/obj/**/Package/
+**/obj/**/AppxManifest.xml
+*.appx
+*.appxbundle
+*.appxupload
+*.e2e
+**/PublishProfiles/
+**/publish/
+*.deploy.cmd
+*.publishsettings
+
+# Rider / ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Others
+*.orig
+*.bak
+*.tmp
+*.swp
+*.DS_Store
+Thumbs.db
