@@ -10,6 +10,9 @@
     <Project Path="src/Core/TaskManager.Application/TaskManager.Application.csproj" Id="b624c6a8-0fb1-459e-b38e-adf68f46d578" />
     <Project Path="src/Core/TaskManager.Domain/TaskManager.Domain.csproj" Id="93a1238c-2621-4a64-b4d1-a2e64cd4d5b7" />
   </Folder>
+  <Folder Name="/src/Infrastructure/">
+    <Project Path="src/Infrastructure/TaskManager.Infrastructure/TaskManager.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/test/">
     <Project Path="test/TaskManager.UnitTests/TaskManager.UnitTests.csproj" Id="26bfceff-e267-4c34-84c0-f0afdc8936ca" />
   </Folder>
