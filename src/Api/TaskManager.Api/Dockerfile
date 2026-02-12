@@ -12,19 +12,22 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["TaskManager.csproj", "."]
-RUN dotnet restore "./TaskManager.csproj"
+COPY ["src/Api/TaskManager.Api/TaskManager.Api.csproj", "src/Api/TaskManager.Api/"]
+COPY ["src/Core/TaskManager.Application/TaskManager.Application.csproj", "src/Core/TaskManager.Application/"]
+COPY ["src/Core/TaskManager.Domain/TaskManager.Domain.csproj", "src/Core/TaskManager.Domain/"]
+COPY ["src/Infrastructure/TaskManager.Infrastructure/TaskManager.Infrastructure.csproj", "src/Infrastructure/TaskManager.Infrastructure/"]
+RUN dotnet restore "./src/Api/TaskManager.Api/TaskManager.Api.csproj"
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "./TaskManager.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/src/Api/TaskManager.Api"
+RUN dotnet build "./TaskManager.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./TaskManager.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./TaskManager.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "TaskManager.dll"]
+ENTRYPOINT ["dotnet", "TaskManager.Api.dll"]
