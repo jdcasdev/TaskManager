@@ -2,8 +2,8 @@
 
 namespace TaskManager.Application.Commands.v1
 {
-    public class DeleteTaskCommand(int id) : IRequest
+    public class DeleteTaskCommand(string id) : IRequest
     {
-        public int Id { get; set; } = id;
+        public string Id { get; set; } = id;
     }
 }

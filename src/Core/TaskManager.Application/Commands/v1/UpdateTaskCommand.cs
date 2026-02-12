@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using TaskManager.Application.DTOs.v1.Request;
 
 namespace TaskManager.Application.Commands.v1
 {
-    public class UpdateTaskCommand(int id) : IRequest
+    public class UpdateTaskCommand(string id, UpdateTaskReqDto payload) : IRequest
     {
-        public int Id { get; set; } = id;
+        public string Id { get; set; } = id;
+        public UpdateTaskReqDto Payload { get; set; } = payload;
     }
 }

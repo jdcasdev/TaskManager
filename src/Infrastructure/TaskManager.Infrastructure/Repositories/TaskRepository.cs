@@ -13,5 +13,29 @@ namespace TaskManager.Infrastructure.Repositories
         {
             return await context.Tasks.Find(FilterDefinition<TaskItem>.Empty).ToListAsync(cancellationToken);
         }
+
+        public async Task<TaskItem?> GetByIdAsync(string id, CancellationToken cancellationToken = default)
+        {
+            var filter = Builders<TaskItem>.Filter.Eq(t => t.Id, id);
+            return await context.Tasks.Find(filter).FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public async Task<TaskItem> CreateAsync(TaskItem taskItem, CancellationToken cancellationToken = default)
+        {
+            await context.Tasks.InsertOneAsync(taskItem, null, cancellationToken);
+            return taskItem;
+        }
+
+        public async Task UpdateAsync(TaskItem taskItem, CancellationToken cancellationToken = default)
+        {
+            var filter = Builders<TaskItem>.Filter.Eq(t => t.Id, taskItem.Id);
+            await context.Tasks.ReplaceOneAsync(filter, taskItem, options: null as ReplaceOptions, cancellationToken);
+        }
+
+        public async Task DeleteAsync(string id, CancellationToken cancellationToken = default)
+        {
+            var filter = Builders<TaskItem>.Filter.Eq(t => t.Id, id);
+            await context.Tasks.DeleteOneAsync(filter, cancellationToken);
+        }
     }
 }

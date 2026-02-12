@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using TaskManager.Application.Queries.v1;
+using TaskManager.Application.Commands.v1;
 
 namespace TaskManager.Application.Validators
 {
-    public class GetTaskByIdQueryValidator : AbstractValidator<GetTaskByIdQuery>
+    public class DeleteTaskCommandValidator : AbstractValidator<DeleteTaskCommand>
     {
-        public GetTaskByIdQueryValidator()
+        public DeleteTaskCommandValidator()
         {
             RuleFor(x => x.Id)
                 .NotEmpty()

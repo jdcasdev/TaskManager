@@ -1,5 +1,8 @@
-﻿using FluentValidation;
+﻿using System;
+using FluentValidation;
 using TaskManager.Application.Commands.v1;
+using TaskManager.Application.DTOs.v1.Request;
+using TaskManager.Domain;
 
 namespace TaskManager.Application.Validators
 {
@@ -8,8 +11,36 @@ namespace TaskManager.Application.Validators
         public UpdateTaskCommandValidator()
         {
             RuleFor(x => x.Id)
-                .GreaterThan(0)
-                .WithMessage("El Id debe de ser mayor que 0.");
+                .NotEmpty()
+                .WithMessage("El Id no puede estar vacío.")
+                .Length(24)
+                .WithMessage("El Id debe contener exactamente 24 dígitos.");
+            RuleFor(x => x.Payload)
+                .NotNull()
+                .WithMessage("La carga útil no está siendo enviada correctamente.")
+                .SetValidator(new UpdateTaskReqDtoValidator());
+        }
+    }
+
+    public class UpdateTaskReqDtoValidator : AbstractValidator<UpdateTaskReqDto>
+    {
+        public UpdateTaskReqDtoValidator()
+        {
+            RuleFor(x => x.Title)
+                .NotEmpty()
+                .WithMessage("El título es requerido.")
+                .MaximumLength(100)
+                .WithMessage("El título no puede tener más de 100 caracteres.");
+            RuleFor(x => x.Description)
+                .NotEmpty()
+                .WithMessage("La descripción es requerida.")
+                .MaximumLength(500)
+                .WithMessage("La descripción no puede tener más de 500 caracteres.");
+            RuleFor(x => x.Status)
+                .NotEmpty()
+                .WithMessage("El estatus es requerido.")
+                .Must(status => TaskStatusNormalized.TryNormalize(status, out _))
+                .WithMessage("El estatus enviado no es válido. Valores permitidos: Pendiente, En progreso, Completada.");
         }
     }
 }
